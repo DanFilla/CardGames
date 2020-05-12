@@ -8,6 +8,7 @@ public class Poker {
 	Scanner input = new Scanner(System.in);
 	Deck deck = new Deck();
 	ArrayList<Player> players = new ArrayList<>();
+	ArrayList<Player> foldedPlayers = new ArrayList<>();
 	private final ArrayList<Card> flop = new ArrayList<>();
 
 	public Poker() {
@@ -30,15 +31,15 @@ public class Poker {
 		}
 
 		// Loop for the entire deal session.
-		for (int j=0; j<=2; j++) {
+		for (int j=0; j<3; j++) {
 			System.out.println("You are betting on round " + j);
 			if (j == 0) {
 				deck.drawFlop(flop);
-			}else if (j > 1) {
-				flop.add(deck.drawBurn());
+			}else {
+				this.flop.add(deck.drawBurn());
 			}
 			System.out.println(this.flop);
-			pot.bet(players);
+			pot.bet(players, foldedPlayers);
 		}
 	}
 

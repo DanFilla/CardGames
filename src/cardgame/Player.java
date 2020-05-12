@@ -11,11 +11,12 @@ public class Player {
     private String name;
     private final ArrayList<Card> hand = new ArrayList<>();
 	private Boolean hasChecked = false;
+	private Boolean hasFolded = false;
 	private int currentBet = 0;
 	private int bank = 500;
 
 	public Player () {
-		this.id = this.nextId;
+		this.id = nextId;
 		nextId++;
 	}
 
@@ -47,22 +48,30 @@ public class Player {
 		this.hasChecked = false;
 	}
 
-	public void addToGetCurrentBet() {
-		Scanner input = new Scanner(System.in);
-		System.out.println("Your current bet is " + this.currentBet);
-		System.out.println("How much would " + this.name + " like to bet?");
-		String betNum = input.nextLine();
-		int betNumInt = Integer.parseInt(betNum);
-
-		if (betNumInt > bank) {
-			return;
-		}else if (betNumInt == 0) {
-			this.hasChecked = true;
-		}else {
-			this.bank -= betNumInt;
-			this.currentBet += betNumInt;
-		}
+	public Boolean getHasFolded() {
+		return this.hasFolded;
 	}
+
+//	public void addToGetCurrentBet() {
+//		Scanner input = new Scanner(System.in);
+//		System.out.println("Your current bet is " + this.currentBet);
+//		System.out.println("How much would " + this.name + " like to bet?");
+//		String betNum = input.nextLine();
+//		if (betNum.equals("fold")) {
+//			this.hasFolded = true;
+//			return;
+//		}
+//		int betNumInt = Integer.parseInt(betNum);
+//
+//		if (betNumInt > bank) {
+//			return;
+//		}else if (betNumInt == 0) {
+//			this.hasChecked = true;
+//		}else {
+//			this.bank -= betNumInt;
+//			this.currentBet += betNumInt;
+//		}
+//	}
 
 	public int getCurrentBet() {
 		return this.currentBet;
@@ -73,11 +82,18 @@ public class Player {
 	}
 
 
-	public void bet() {
+	public void bet(Boolean firstRound) {
 		Scanner input = new Scanner(System.in);
 		System.out.println(this.toString());
+		if (!firstRound){
+			System.out.println("Your current bet is " + this.currentBet);
+		}
 		System.out.println("How much would " + this.name + " like to bet?");
 		String betNum = input.nextLine();
+		if (betNum.equals("fold")) {
+			this.hasFolded = true;
+			return;
+		}
 		int betNumInt = Integer.parseInt(betNum);
 
 		if (betNumInt > bank) {
@@ -89,6 +105,14 @@ public class Player {
 			this.currentBet += betNumInt;
 		}
 	}
+//
+//	public int bestHand(ArrayList<Card> flop) {
+//		int handId;
+//
+//
+//
+//		return handId;
+//	}
 
     @Override
     public String toString() {

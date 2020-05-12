@@ -20,7 +20,7 @@ public class Betting {
 		this.pot += betFromPlayer;
 	}
 
-	public void bet(ArrayList<Player> playerList) {
+	public void bet(ArrayList<Player> playerList, ArrayList<Player> foldedPlayers) {
 		// Method will loop through players while checking the previous players bet. This previous bet
 		// is the minimum bet required to continue playing.
 		// at the end of each iteration it also checks if all of the bets are identical
@@ -44,27 +44,21 @@ public class Betting {
 			while (true) {
 				Player currentPlayer = playerList.get(count);
 
-				if (firstRound) {
-					currentPlayer.bet();
-				}else {
-					currentPlayer.addToGetCurrentBet();
+				currentPlayer.bet(firstRound);
+
+				if (currentPlayer.getHasFolded()) {
+					this.addToPot(currentPlayer.getCurrentBet());
+					foldedPlayers.add(playerList.get(count));
+					playerList.remove(playerList.get(count));
+					count--;
+					break;
 				}
 				if (currentPlayer.getCurrentBet() >= previousBet) {
 					break;
 				}
-
-//				if (count == 0) {
-//					if (currentPlayer.getCurrentBet() >= previousBet) {
-//						break;
-//					}
-//				}else {
-//					if (currentPlayer.getCurrentBet() >= previousBet) {
-//						break;
-//					}
-//				}
 			}
 
-			// check if all of the bets are equal or if every player has checked.
+			// check if all of the bets are equal.
 			Boolean areBetsEqual = true;
 			Integer firstBet = playerList.get(0).getCurrentBet();
 			for (Player person : playerList) {
@@ -74,15 +68,13 @@ public class Betting {
 				}
 			}
 
-			int checkCount = 0;
+			// checks if all players have checked.
+			Boolean haveAllPlayersChecked = true;
 			for (Player person2 : playerList) {
-				if (person2.getHasChecked()) {
-					checkCount++;
+				if (!person2.getHasChecked()) {
+					haveAllPlayersChecked = false;
+					break;
 				}
-			}
-			Boolean haveAllPlayersChecked = false;
-			if (checkCount == playerList.size()) {
-				haveAllPlayersChecked = true;
 			}
 
 			count++;
@@ -93,6 +85,8 @@ public class Betting {
 				firstRound = false;
 			}
 
+			//if all the bets are equal or all the players have checked.
+			// if either is true then the betting round is terminated.
 			if (areBetsEqual || haveAllPlayersChecked) {
 				potIsNotGood = false;
 			}
