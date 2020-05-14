@@ -1,7 +1,8 @@
 package cardgame;
 
 import java.util.ArrayList;
- import java.util.Scanner;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Player {
 
@@ -14,6 +15,7 @@ public class Player {
 	private Boolean hasFolded = false;
 	private int currentBet = 0;
 	private int bank = 500;
+	private Map<Integer, Integer> handMap;
 
 	public Player () {
 		this.id = nextId;
@@ -31,10 +33,13 @@ public class Player {
         }
     }
 
-    public ArrayList<Card> play() {
+    public ArrayList<Card> getHand() {
         return this.hand;
     }
 
+    public String getName() {
+		return this.name;
+	}
 
 	public int getId() {
 		return this.id;
@@ -52,26 +57,13 @@ public class Player {
 		return this.hasFolded;
 	}
 
-//	public void addToGetCurrentBet() {
-//		Scanner input = new Scanner(System.in);
-//		System.out.println("Your current bet is " + this.currentBet);
-//		System.out.println("How much would " + this.name + " like to bet?");
-//		String betNum = input.nextLine();
-//		if (betNum.equals("fold")) {
-//			this.hasFolded = true;
-//			return;
-//		}
-//		int betNumInt = Integer.parseInt(betNum);
-//
-//		if (betNumInt > bank) {
-//			return;
-//		}else if (betNumInt == 0) {
-//			this.hasChecked = true;
-//		}else {
-//			this.bank -= betNumInt;
-//			this.currentBet += betNumInt;
-//		}
-//	}
+	public Map<Integer, Integer> getHandMap() {
+		return this.handMap;
+	}
+
+	public void setHandMap(Map<Integer, Integer> hMap) {
+		this.handMap = hMap;
+	}
 
 	public int getCurrentBet() {
 		return this.currentBet;
@@ -105,14 +97,6 @@ public class Player {
 			this.currentBet += betNumInt;
 		}
 	}
-//
-//	public int bestHand(ArrayList<Card> flop) {
-//		int handId;
-//
-//
-//
-//		return handId;
-//	}
 
     @Override
     public String toString() {

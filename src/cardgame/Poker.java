@@ -20,7 +20,7 @@ public class Poker {
 		int numPlayersString = Integer.parseInt(numPlayers);
 
 		for (int i=0; i<numPlayersString; i++) {
-			System.out.println("What is name of player: " + i);
+			System.out.println("What is name of player: " + (i+1));
 			String name = input.nextLine();
 			players.add(new Player(name));
 		}
@@ -32,7 +32,7 @@ public class Poker {
 
 		// Loop for the entire deal session.
 		for (int j=0; j<3; j++) {
-			System.out.println("You are betting on round " + j);
+			System.out.println("You are betting on round " + (j+1));
 			if (j == 0) {
 				deck.drawFlop(flop);
 			}else {
@@ -41,6 +41,17 @@ public class Poker {
 			System.out.println(this.flop);
 			pot.bet(players, foldedPlayers);
 		}
-	}
 
+		Player winner = players.get(0);
+
+		for (Player y : players) {
+			ArrayList<Card> allCard = new ArrayList<>(this.flop);
+			allCard.addAll(y.getHand());
+			y.setHandMap(WinDetection.bestPokerHand(allCard));
+			if (y.getHandMap().get(1) > winner.getHandMap().get(1)) {
+				winner = y;
+			}
+		}
+		System.out.println(winner.getName());
+	}
 }
