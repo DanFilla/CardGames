@@ -49,6 +49,7 @@ public class Deck {
         this.burn();
         checkEmpty();
         Card card = deck.get(0);
+        discardDeck.add(card);
         deck.remove(0);
         return card;
     }

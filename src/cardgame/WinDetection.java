@@ -16,15 +16,9 @@ public class WinDetection {
 		return cardNum;
 	}
 
-	private static Boolean isOnePair(ArrayList<Card> hand) {
-		ArrayList<Integer> parsedHand = new ArrayList<>();
-
-		for (Card card : hand) {
-			parsedHand.add(card.getCardNumberAsInt());
-		}
-
+	private static Boolean isOnePair(ArrayList<Integer> hand) {
 		for (int i=0; i<hand.size()-1; i++) {
-			if (parsedHand.subList(i+1, parsedHand.size()).contains(parsedHand.get(i))) {
+			if (hand.subList(i+1, hand.size()).contains(hand.get(i))) {
 				return true;
 			}
 		}
@@ -32,39 +26,51 @@ public class WinDetection {
 
 	}
 
-	//private Boolean isTwoPair(ArrayList<Card> hand) {
+	private static Boolean isTwoPair(ArrayList<Integer> hand) {
+		int count = 0;
 
-	//}
+		for (int i=0; i<hand.size()-1; i++) {
+			if (hand.subList(i+1, hand.size()).contains(hand.get(i))) {
+				count++;
+			}
+		}
+		return count > 1;
 
-	//private Boolean isThreeOfAKind(ArrayList<Card> hand) {
 
-	//}
+	}
 
-	//private Boolean isStraight(ArrayList<Card> hand) {
+	private static Boolean isThreeOfAKind(ArrayList<Integer> hand) {
+		return false;
 
-	//}
+	}
 
-	//private Boolean isFlush(ArrayList<Card> hand) {
+	private static Boolean isStraight(ArrayList<Integer> hand) {
+		return false;
 
-	//}
+	}
 
-	//private Boolean isFullHouse(ArrayList<Card> hand) {
+	private static Boolean isFlush(ArrayList<Integer> hand) {
+		return false;
 
-	//}
+	}
 
-	//private Boolean isFourOfAKind(ArrayList<Card> hand) {
+	private static Boolean isFullHouse(ArrayList<Integer> hand) {
+		return false;
 
-	//}
+	}
 
-	//private Boolean isStraightFlush(ArrayList<Card> hand) {
+	private static Boolean isFourOfAKind(ArrayList<Integer> hand) {
+		return false;
 
-	//}
+	}
 
-	public static Map<Integer, Integer> bestPokerHand(ArrayList<Card> hand) {
+	private static Boolean isStraightFlush(ArrayList<Integer> hand) {
+		return false;
+
+	}
+
+	public static Map<String, Integer> bestPokerHand(ArrayList<Card> hand) {
 		//takes in any number of cards and produces the best hand.
-
-		//format for returned map.
-		//Map<best hand id, high card>
 
 		//*** hand id's ***
 		//Straight flush : 1
@@ -76,14 +82,45 @@ public class WinDetection {
 		//Two Pair       : 7
 		//One Pair       : 8
 		//HighCard       : 9
-		int highCard;
 
+		int highCard = getHighCard(hand);
 
+		ArrayList<Integer> parsedHand = new ArrayList<>();
+		for (Card card : hand) {
+			parsedHand.add(card.getCardNumberAsInt());
+		}
 
-		Map <Integer, Integer> formatedMap = new HashMap<>();
-		formatedMap.put(1, getHighCard(hand));
-		System.out.println(isOnePair(hand));
-		return formatedMap;
+		Map <String, Integer> formattedMap = new HashMap<>();
+
+		if (isStraightFlush(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 1);
+		}else if(isFourOfAKind(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 2);
+		}else if(isFullHouse(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 3);
+		}else if(isFlush(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 4);
+		}else if(isStraight(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 5);
+		}else if(isThreeOfAKind(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 6);
+		}else if(isTwoPair(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 7);
+		}else if(isOnePair(parsedHand)){
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 8);
+		}else {
+			formattedMap.put("highCard", highCard);
+			formattedMap.put("handId", 9);
+		}
+		return formattedMap;
 	}
 
 

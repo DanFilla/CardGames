@@ -48,7 +48,9 @@ public class Poker {
 			ArrayList<Card> allCard = new ArrayList<>(this.flop);
 			allCard.addAll(y.getHand());
 			y.setHandMap(WinDetection.bestPokerHand(allCard));
-			if (y.getHandMap().get(1) > winner.getHandMap().get(1)) {
+			if (y.getHandMap().get("handId") > winner.getHandMap().get("handId")) {
+				winner = y;
+			}else if (y.getHandMap().get("handId").equals(winner.getHandMap().get("handId")) && y.getHandMap().get("highCard") > winner.getHandMap().get("highCard")) {
 				winner = y;
 			}
 		}

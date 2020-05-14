@@ -15,7 +15,7 @@ public class Player {
 	private Boolean hasFolded = false;
 	private int currentBet = 0;
 	private int bank = 500;
-	private Map<Integer, Integer> handMap;
+	private Map<String, Integer> handMap;
 
 	public Player () {
 		this.id = nextId;
@@ -57,11 +57,11 @@ public class Player {
 		return this.hasFolded;
 	}
 
-	public Map<Integer, Integer> getHandMap() {
+	public Map<String, Integer> getHandMap() {
 		return this.handMap;
 	}
 
-	public void setHandMap(Map<Integer, Integer> hMap) {
+	public void setHandMap(Map<String, Integer> hMap) {
 		this.handMap = hMap;
 	}
 
