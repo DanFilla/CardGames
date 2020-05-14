@@ -1,8 +1,6 @@
 package cardgame;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WinDetection {
 
@@ -23,7 +21,6 @@ public class WinDetection {
 			}
 		}
 		return false;
-
 	}
 
 	private static Boolean isTwoPair(ArrayList<Integer> hand) {
@@ -35,13 +32,21 @@ public class WinDetection {
 			}
 		}
 		return count > 1;
-
-
 	}
 
 	private static Boolean isThreeOfAKind(ArrayList<Integer> hand) {
+		int count = 0;
+		for (int i=1; i<hand.size(); i++) {
+			if (hand.get(i).equals(hand.get(i - 1))) {
+				count += 1;
+			}else {
+				count = 0;
+			}
+			if (count > 1){
+				return true;
+			}
+		}
 		return false;
-
 	}
 
 	private static Boolean isStraight(ArrayList<Integer> hand) {
@@ -89,6 +94,8 @@ public class WinDetection {
 		for (Card card : hand) {
 			parsedHand.add(card.getCardNumberAsInt());
 		}
+
+		Collections.sort(parsedHand);
 
 		Map <String, Integer> formattedMap = new HashMap<>();
 
