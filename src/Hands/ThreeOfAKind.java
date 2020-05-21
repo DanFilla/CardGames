@@ -3,13 +3,14 @@ package Hands;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TwoPair implements Hand{
+public class ThreeOfAKind implements Hand {
+
 
     static final int handId = 7;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
-    public TwoPair(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
+    public ThreeOfAKind(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
         this.requiredHand = new ArrayList<Integer>(aRequiredHand);
         this.kickers = new ArrayList<Integer>(aKickers);
 
@@ -23,19 +24,15 @@ public class TwoPair implements Hand{
         }else if(handId < o.getHandId()) {
             return 1;
         }else {
-            if (this.requiredHand.get(2) > o.getRequiredHand().get(2)) {
+            if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
                 return -1;
-            }else if (this.requiredHand.get(2) < o.getRequiredHand().get(2)) {
+            }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
                 return 1;
             }else {
-                if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
-                    return -1;
-                }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
-                    return 1;
-                }else {
-                    if (kickers.get(0) > o.getKickers().get(0)) {
+                for (int i=kickers.size()-1; i>=0; i--) {
+                    if (kickers.get(i) > o.getKickers().get(i)) {
                         return -1;
-                    }else if (kickers.get(0) < o.getKickers().get(0)) {
+                    } else if (kickers.get(i) < o.getKickers().get(i)) {
                         return 1;
                     }
                 }

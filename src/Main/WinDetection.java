@@ -61,7 +61,10 @@ public class WinDetection {
 	}
 
 	private static Boolean isThreeOfAKind(ArrayList<Integer> hand) {
+		requiredCards.clear();
+
 		int count = 0;
+
 		for (int i=1; i<hand.size(); i++) {
 			if (hand.get(i).equals(hand.get(i - 1))) {
 				count += 1;
@@ -69,6 +72,9 @@ public class WinDetection {
 				count = 0;
 			}
 			if (count > 1){
+				requiredCards.add(hand.get(i));
+				requiredCards.add(hand.get(i));
+				requiredCards.add(hand.get(i));
 				return true;
 			}
 		}
@@ -207,8 +213,10 @@ public class WinDetection {
 //			formattedMap.put("handId", 9);
 //		}
 
-
-		if (isTwoPair(parsedHand)) {
+		if(isThreeOfAKind(parsedHand)) {
+			getKickerSet(requiredCards, parsedHand);
+			return new ThreeOfAKind(requiredCards, kickerSet);
+		}else if (isTwoPair(parsedHand)) {
 			getKickerSet(requiredCards, parsedHand);
 			return new TwoPair(requiredCards, kickerSet);
 		}else if(isOnePair(parsedHand)) {
