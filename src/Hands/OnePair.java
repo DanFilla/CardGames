@@ -20,20 +20,20 @@ public class OnePair implements Hand {
     @Override
     public int compareTo(Hand o) {
         if (handId > o.getHandId()) {
-            return 1;
-        }else if(handId < o.getHandId()) {
             return -1;
+        }else if(handId < o.getHandId()) {
+            return 1;
         }else {
             if (requiredHand.get(0) > o.getRequiredHand().get(0)) {
-                return 1;
-            }else if (requiredHand.get(0) < o.getRequiredHand().get(0)){
                 return -1;
+            }else if (requiredHand.get(0) < o.getRequiredHand().get(0)){
+                return 1;
             }else {
                 for (int i=kickers.size()-1; i>=0; i--) {
                     if (kickers.get(i) > o.getKickers().get(i)) {
-                        return 1;
-                    }else if (kickers.get(i) < o.getKickers().get(i)) {
                         return -1;
+                    }else if (kickers.get(i) < o.getKickers().get(i)) {
+                        return 1;
                     }
                 }
             }
@@ -42,10 +42,20 @@ public class OnePair implements Hand {
         return 0;
     }
 
-//    @Override
-//    public String toString() {
-//        return this.requiredHand.toString();
-//    }
+    @Override
+    public String toString() {
+        String temp = "RequiredHand: ";
+
+        for (Integer card : this.requiredHand) {
+            temp += card.toString() + " ";
+        }
+        temp += "\nKickerCards: ";
+
+        for (Integer acard : this.kickers) {
+            temp += acard.toString() +  " ";
+        }
+        return temp;
+    }
 
     public boolean equals(Hand o) {
         for (int j=0; j<requiredHand.size(); j++) {

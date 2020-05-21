@@ -23,7 +23,7 @@ public class WinDetection {
 
 	private static void getKickerSet(ArrayList<Integer> reqCards, ArrayList<Integer> hand) {
 		for (int i=hand.size()-1; i>=0; i--) {
-			if (kickerSet.size() > 2) {
+			if (kickerSet.size() > 4-requiredCards.size()) {
 				return;
 			}
 			if (!reqCards.contains(hand.get(i))) {
@@ -52,6 +52,7 @@ public class WinDetection {
 
 		for (int i=0; i<hand.size()-1; i++) {
 			if (hand.subList(i+1, hand.size()).contains(hand.get(i))) {
+				requiredCards.add(hand.get(i));
 				requiredCards.add(hand.get(i));
 				count++;
 			}
@@ -206,7 +207,11 @@ public class WinDetection {
 //			formattedMap.put("handId", 9);
 //		}
 
-		if(isOnePair(parsedHand)) {
+
+		if (isTwoPair(parsedHand)) {
+			getKickerSet(requiredCards, parsedHand);
+			return new TwoPair(requiredCards, kickerSet);
+		}else if(isOnePair(parsedHand)) {
 			getKickerSet(requiredCards, parsedHand);
 			return new OnePair(requiredCards, kickerSet);
 		}

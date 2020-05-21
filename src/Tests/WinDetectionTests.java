@@ -15,8 +15,8 @@ import static org.junit.Assert.*;
 public class WinDetectionTests {
 
     @Test
-    public void testOnePair() {
-        //test for three of a kind.
+    public void testOnePairConstruction() {
+
         ArrayList<Card> flop = new ArrayList<>();
         flop.add(new Card("2", "H"));
         flop.add(new Card("6", "C"));
@@ -44,15 +44,19 @@ public class WinDetectionTests {
         for (int j=0; j<expected.getKickers().size(); j++) {
             assertEquals(expected.getKickers().get(j), actual.getKickers().get(j));
         }
+    }
 
-        ArrayList<Card> flop2 = new ArrayList<>();
-        flop2.add(new Card("2", "H"));
-        flop2.add(new Card("6", "C"));
-        flop2.add(new Card("10", "S"));
-        flop2.add(new Card("10", "C"));
-        flop2.add(new Card("9", "H"));
-        flop2.add(new Card("J", "D"));
-        flop2.add(new Card("5", "D"));
+    @Test
+    public void testOnePairCompareTo() {
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(9);
+        reqCards.add(9);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+        kickerSet.add(11);
+        kickerSet.add(10);
+        kickerSet.add(6);
+
+        Hand expected = new OnePair(reqCards, kickerSet);
 
         ArrayList<Integer> reqCards2 = new ArrayList<>();
         reqCards2.add(10);
@@ -63,32 +67,20 @@ public class WinDetectionTests {
         kickerSet2.add(6);
 
         Hand expected2 = new OnePair(reqCards2, kickerSet2);
-        Hand actual2 = WinDetection.bestPokerHand(flop2);
-
-        for (int i=0; i<2; i++) {
-            assertEquals(expected2.getRequiredHand().get(i), actual2.getRequiredHand().get(i));
-        }
-
-        for (int j=0; j<3; j++) {
-            assertEquals(expected2.getKickers().get(j), actual2.getKickers().get(j));
-        }
 
         ArrayList<Hand> handList = new ArrayList<>();
-        handList.add(actual2);
-        handList.add(actual);
+        handList.add(expected2);
+        handList.add(expected);
 
         Collections.sort(handList);
 
 
-        assertSame(handList.get(0), actual);
-
-
+        assertSame(expected2, handList.get(0));
     }
 
-    @Ignore
     @Test
-    public void testTwoPair() {
-        //test for three of a kind.
+    public void testTwoPairConstruction() {
+
         ArrayList<Card> flop = new ArrayList<>();
         flop.add(new Card("5", "H"));
         flop.add(new Card("6", "C"));
@@ -98,11 +90,55 @@ public class WinDetectionTests {
         flop.add(new Card("K", "D"));
         flop.add(new Card("5", "D"));
 
-        Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("handId", 7);
-        expectedMap.put("highCard", 13);
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(5);
+        reqCards.add(5);
+        reqCards.add(10);
+        reqCards.add(10);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+        kickerSet.add(13);
 
-        assertEquals(expectedMap, WinDetection.bestPokerHand(flop));
+        Hand expected = new OnePair(reqCards, kickerSet);
+        Hand actual = WinDetection.bestPokerHand(flop);
+
+        for (int i=0; i<2; i++) {
+            assertEquals(expected.getRequiredHand().get(i), actual.getRequiredHand().get(i));
+        }
+
+        assertEquals(expected.getKickers().get(0), actual.getKickers().get(0));
+    }
+
+    @Test
+    public void testTwoPairCompare() {
+
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(10);
+        reqCards.add(10);
+        reqCards.add(13);
+        reqCards.add(13);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+        kickerSet.add(9);
+
+        Hand expected = new TwoPair(reqCards, kickerSet);
+
+        ArrayList<Integer> reqCards2 = new ArrayList<>();
+        reqCards2.add(5);
+        reqCards2.add(5);
+        reqCards2.add(10);
+        reqCards2.add(10);
+        ArrayList<Integer> kickerSet2 = new ArrayList<>();
+        kickerSet2.add(13);
+
+        Hand expected2 = new TwoPair(reqCards2, kickerSet2);
+
+        ArrayList<Hand> handList = new ArrayList<>();
+        handList.add(expected2);
+        handList.add(expected);
+
+        Collections.sort(handList);
+
+
+        assertSame(expected, handList.get(0));
     }
 
     @Ignore

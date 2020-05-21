@@ -8,9 +8,9 @@ public interface Hand extends Comparable<Hand> {
 
     @Override
     public int compareTo(Hand o);
-//
-//    @Override
-//    public String toString();
+
+    @Override
+    public String toString();
 
     public boolean equals(Hand o);
 
