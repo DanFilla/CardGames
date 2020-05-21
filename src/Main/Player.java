@@ -1,4 +1,6 @@
-package cardgame;
+package Main;
+
+import Hands.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -11,6 +13,7 @@ public class Player {
 	private final int id;
     private String name;
     private final ArrayList<Card> hand = new ArrayList<>();
+    private Hand bestHand;
 	private Boolean hasChecked = false;
 	private Boolean hasFolded = false;
 	private int currentBet = 0;
@@ -73,6 +76,17 @@ public class Player {
 		this.currentBet = 0;
 	}
 
+	public void setBestHand(Hand aBestHand) {
+		this.bestHand = aBestHand;
+	}
+
+	public Hand getBestHand() {
+		return this.bestHand;
+	}
+
+	public void resetBestHand() {
+		this.bestHand = null;
+	}
 
 	public void bet(Boolean firstRound) {
 		Scanner input = new Scanner(System.in);

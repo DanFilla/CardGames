@@ -1,4 +1,4 @@
-package cardgame;
+package Main;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +17,10 @@ public class Deck {
             }
         }
         Collections.shuffle(deck);
+    }
+
+    public ArrayList<Card> getDeck() {
+        return this.deck;
     }
 
     private void checkEmpty() {

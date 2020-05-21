@@ -1,12 +1,9 @@
-package cardgame;
+package Main;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Betting {
 
-	private Integer playerThatRaisedIndex;
-	private Integer playerBet;
 	private Boolean firstRound = true;
 	private Integer count = 0;
 

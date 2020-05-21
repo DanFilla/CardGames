@@ -1,4 +1,4 @@
-package cardgame;
+package Main;
 
 public class Card {
     private final String number;
@@ -23,7 +23,7 @@ public class Card {
 		}else if (this.number.equals("K")) {
 			this.parsedNumber = 13;
 		}else if (this.number.equals("A")) {
-			this.parsedNumber = 1;
+			this.parsedNumber = 14;
 		}else {
 			parsedNumber = Integer.parseInt(this.number);
 		}

@@ -1,4 +1,4 @@
-package cardgame;
+package Main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -42,18 +42,19 @@ public class Poker {
 			pot.bet(players, foldedPlayers);
 		}
 
-		Player winner = players.get(0);
-
-		for (Player y : players) {
-			ArrayList<Card> allCard = new ArrayList<>(this.flop);
-			allCard.addAll(y.getHand());
-			y.setHandMap(WinDetection.bestPokerHand(allCard));
-			if (y.getHandMap().get("handId") > winner.getHandMap().get("handId")) {
-				winner = y;
-			}else if (y.getHandMap().get("handId").equals(winner.getHandMap().get("handId")) && y.getHandMap().get("highCard") > winner.getHandMap().get("highCard")) {
-				winner = y;
-			}
-		}
-		System.out.println(winner.getName());
+//		Player winner = players.get(0);
+//
+//		for (Player y : players) {
+//			ArrayList<Card> allCard = new ArrayList<>(this.flop);
+//			allCard.addAll(y.getHand());
+//			y.setHandMap(WinDetection.bestPokerHand(allCard));
+//			if (y.getHandMap().get("handId") < winner.getHandMap().get("handId")) {
+//				winner = y;
+//			}else if (y.getHandMap().get("handId").equals(winner.getHandMap().get("handId")) && y.getHandMap().get("highCard") > winner.getHandMap().get("highCard")) {
+//				winner = y;
+//			}
+//		}
+//		System.out.println(winner.getName());
+//		System.out.println(WinDetection.getHandName(winner.getHandMap().get("handId")));
 	}
 }
