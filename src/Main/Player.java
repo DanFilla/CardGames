@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
 	private static int nextId = 0;
 
@@ -30,11 +30,23 @@ public class Player {
         this.name = name;
     }
 
+    @Override
+	public int compareTo(Player o) {
+		return this.bestHand.compareTo(o.getBestHand());
+	}
+
     public void draw(Deck deck, int numCards) {
         for (int i=0; i < numCards; i++) {
             hand.add(deck.draw());
         }
     }
+
+	public boolean equals(Player p) {
+		if (this.bestHand.getHandId() == p.getBestHand().getHandId()) {
+			return this.bestHand.equals(p.getBestHand());
+		}
+		return false;
+	}
 
     public ArrayList<Card> getHand() {
         return this.hand;

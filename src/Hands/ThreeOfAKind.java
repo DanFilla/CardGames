@@ -19,9 +19,9 @@ public class ThreeOfAKind implements Hand {
 
     @Override
     public int compareTo(Hand o) {
-        if (handId > o.getHandId()) {
+        if (handId < o.getHandId()) {
             return -1;
-        }else if(handId < o.getHandId()) {
+        }else if(handId > o.getHandId()) {
             return 1;
         }else {
             if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
@@ -43,7 +43,7 @@ public class ThreeOfAKind implements Hand {
 
     @Override
     public String toString() {
-        String temp = "RequiredHand: ";
+        String temp = "Three of a kind\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";

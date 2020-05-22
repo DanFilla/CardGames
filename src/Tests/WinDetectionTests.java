@@ -192,7 +192,7 @@ public class WinDetectionTests {
         kickerSet.add(9);
         kickerSet.add(4);
 
-        Hand expected = new TwoPair(reqCards, kickerSet);
+        Hand expected = new ThreeOfAKind(reqCards, kickerSet);
 
         ArrayList<Integer> reqCards2 = new ArrayList<>();
         reqCards2.add(10);
@@ -202,7 +202,7 @@ public class WinDetectionTests {
         kickerSet2.add(13);
         kickerSet2.add(12);
 
-        Hand expected2 = new TwoPair(reqCards2, kickerSet2);
+        Hand expected2 = new ThreeOfAKind(reqCards2, kickerSet2);
 
         ArrayList<Hand> handList = new ArrayList<>();
         handList.add(expected2);
@@ -258,7 +258,7 @@ public class WinDetectionTests {
         reqCards.add(6);
         ArrayList<Integer> kickerSet = new ArrayList<>();
 
-        Hand expected = new TwoPair(reqCards, kickerSet);
+        Hand expected = new Straight(reqCards, kickerSet);
 
         ArrayList<Integer> reqCards2 = new ArrayList<>();
         reqCards2.add(3);
@@ -268,7 +268,7 @@ public class WinDetectionTests {
         reqCards2.add(7);
         ArrayList<Integer> kickerSet2 = new ArrayList<>();
 
-        Hand expected2 = new TwoPair(reqCards2, kickerSet2);
+        Hand expected2 = new Straight(reqCards2, kickerSet2);
 
         ArrayList<Hand> handList = new ArrayList<>();
         handList.add(expected);
@@ -299,7 +299,7 @@ public class WinDetectionTests {
         reqCards.add(12);
         ArrayList<Integer> kickerSet = new ArrayList<>();
 
-        Hand expected = new OnePair(reqCards, kickerSet);
+        Hand expected = new Flush(reqCards, kickerSet);
         Hand actual = WinDetection.bestPokerHand(flop);
 
         assertEquals(expected.getHandId(), actual.getHandId());
@@ -411,44 +411,135 @@ public class WinDetectionTests {
         assertSame(expected2, handList.get(0));
     }
 
-    @Ignore
     @Test
-    public void testFourOfAKind() {
-        //test for three of a kind.
+    public void testFourOfAKindConsruction() {
         ArrayList<Card> flop = new ArrayList<>();
-        flop.add(new Card("10", "S"));
+        flop.add(new Card("5", "C"));
         flop.add(new Card("6", "C"));
-        flop.add(new Card("9", "S"));
+        flop.add(new Card("5", "S"));
         flop.add(new Card("10", "C"));
-        flop.add(new Card("10", "H"));
+        flop.add(new Card("5", "H"));
         flop.add(new Card("J", "D"));
-        flop.add(new Card("10", "D"));
+        flop.add(new Card("5", "D"));
 
-        Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("handId", 2);
-        expectedMap.put("highCard", 10);
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(5);
+        reqCards.add(5);
+        reqCards.add(5);
+        reqCards.add(5);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+        kickerSet.add(11);
 
-        assertEquals(expectedMap, WinDetection.bestPokerHand(flop));
+        Hand expected = new FourOfAKind(reqCards, kickerSet);
+        Hand actual = WinDetection.bestPokerHand(flop);
+
+        assertEquals(expected.getHandId(), actual.getHandId());
+
+        for (int i=0; i<reqCards.size(); i++) {
+            assertEquals(expected.getRequiredHand().get(i), actual.getRequiredHand().get(i));
+        }
+
+        for (int j=0; j<expected.getKickers().size(); j++) {
+            assertEquals(expected.getKickers().get(j), actual.getKickers().get(j));
+        }
     }
 
-    @Ignore
     @Test
-    public void testStraightFlush() {
-        //test for three of a kind.
+    public void testFourOfAKindCompareTo() {
+
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(13);
+        reqCards.add(13);
+        reqCards.add(13);
+        reqCards.add(13);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+        kickerSet.add(9);
+
+        Hand expected = new FourOfAKind(reqCards, kickerSet);
+
+        ArrayList<Integer> reqCards2 = new ArrayList<>();
+        reqCards2.add(10);
+        reqCards2.add(10);
+        reqCards2.add(10);
+        reqCards2.add(10);
+        ArrayList<Integer> kickerSet2 = new ArrayList<>();
+        kickerSet2.add(13);
+
+        Hand expected2 = new FourOfAKind(reqCards2, kickerSet2);
+
+        ArrayList<Hand> handList = new ArrayList<>();
+        handList.add(expected2);
+        handList.add(expected);
+
+        Collections.sort(handList);
+
+
+        assertSame(expected, handList.get(0));
+    }
+
+    @Test
+    public void testStraightFlushConstruction() {
         ArrayList<Card> flop = new ArrayList<>();
+        flop.add(new Card("5", "C"));
+        flop.add(new Card("6", "C"));
+        flop.add(new Card("9", "C"));
+        flop.add(new Card("11", "C"));
         flop.add(new Card("5", "H"));
-        flop.add(new Card("6", "H"));
-        flop.add(new Card("9", "S"));
-        flop.add(new Card("K", "C"));
-        flop.add(new Card("9", "H"));
-        flop.add(new Card("7", "H"));
-        flop.add(new Card("8", "H"));
+        flop.add(new Card("8", "C"));
+        flop.add(new Card("7", "C"));
 
-        Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("handId", 1);
-        expectedMap.put("highCard", 9);
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(5);
+        reqCards.add(6);
+        reqCards.add(7);
+        reqCards.add(8);
+        reqCards.add(9);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
 
-        assertEquals(expectedMap, WinDetection.bestPokerHand(flop));
+        Hand expected = new StraightFlush(reqCards, kickerSet);
+        Hand actual = WinDetection.bestPokerHand(flop);
+
+        assertEquals(expected.getHandId(), actual.getHandId());
+
+        for (int i=0; i<reqCards.size(); i++) {
+            assertEquals(expected.getRequiredHand().get(i), actual.getRequiredHand().get(i));
+        }
+
+        for (int j=0; j<expected.getKickers().size(); j++) {
+            assertEquals(expected.getKickers().get(j), actual.getKickers().get(j));
+        }
+    }
+
+    @Test
+    public void testStraightFlushCompareTo() {
+
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(2);
+        reqCards.add(3);
+        reqCards.add(4);
+        reqCards.add(5);
+        reqCards.add(6);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+
+        Hand expected = new StraightFlush(reqCards, kickerSet);
+
+        ArrayList<Integer> reqCards2 = new ArrayList<>();
+        reqCards2.add(3);
+        reqCards2.add(4);
+        reqCards2.add(5);
+        reqCards2.add(6);
+        reqCards2.add(7);
+        ArrayList<Integer> kickerSet2 = new ArrayList<>();
+
+        Hand expected2 = new StraightFlush(reqCards2, kickerSet2);
+
+        ArrayList<Hand> handList = new ArrayList<>();
+        handList.add(expected);
+        handList.add(expected2);
+
+        Collections.sort(handList);
+
+        assertSame(expected2, handList.get(0));
     }
 
 }

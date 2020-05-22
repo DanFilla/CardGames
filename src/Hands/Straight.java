@@ -16,9 +16,9 @@ public class Straight implements Hand {
 
     @Override
     public int compareTo(Hand o) {
-        if (handId > o.getHandId()) {
+        if (handId < o.getHandId()) {
             return -1;
-        }else if(handId < o.getHandId()) {
+        }else if(handId > o.getHandId()) {
             return 1;
         }else {
             if (requiredHand.get(0) > o.getRequiredHand().get(0)) {
@@ -33,7 +33,7 @@ public class Straight implements Hand {
 
     @Override
     public String toString() {
-        String temp = "RequiredHand: ";
+        String temp = "Straight\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";

@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Poker {
@@ -40,6 +41,31 @@ public class Poker {
 			}
 			System.out.println(this.flop);
 			pot.bet(players, foldedPlayers);
+		}
+
+		for (Player p : players) {
+			ArrayList<Card> allCard = new ArrayList<>(this.flop);
+			allCard.addAll(p.getHand());
+			p.setBestHand(WinDetection.bestPokerHand(allCard));
+		}
+
+		Collections.sort(players);
+
+		for (int q=1; q<players.size(); q++) {
+			if (players.get(q-1).equals(players.get(q))){
+				System.out.println("TIE");
+			};
+		}
+
+		System.out.println("\nWinner");
+		System.out.println(players.get(0));
+		System.out.println(players.get(0).getBestHand());
+
+		System.out.println("\nLosers");
+		for (int o=1; o<players.size(); o++) {
+			System.out.println("");
+			System.out.println(players.get(o));
+			System.out.println(players.get(o).getBestHand());
 		}
 
 //		Player winner = players.get(0);

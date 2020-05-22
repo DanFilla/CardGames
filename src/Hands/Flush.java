@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Flush implements Hand {
 
 
-    static final int handId = 8;
+    static final int handId = 4;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
@@ -20,9 +20,9 @@ public class Flush implements Hand {
 
     @Override
     public int compareTo(Hand o) {
-        if (handId > o.getHandId()) {
+        if (handId < o.getHandId()) {
             return -1;
-        }else if(handId < o.getHandId()) {
+        }else if(handId > o.getHandId()) {
             return 1;
         }else {
             if (requiredHand.get(requiredHand.size()-1) > o.getRequiredHand().get(requiredHand.size()-1)) {
@@ -38,7 +38,7 @@ public class Flush implements Hand {
 
     @Override
     public String toString() {
-        String temp = "RequiredHand: ";
+        String temp = "Flush\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";

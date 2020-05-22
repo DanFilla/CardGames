@@ -25,9 +25,9 @@ public class FullHouse implements Hand {
         int pairLocation;
         int threeOfAKindLocation;
 
-        if (handId > o.getHandId()) {
+        if (handId < o.getHandId()) {
             return -1;
-        }else if(handId < o.getHandId()) {
+        }else if(handId > o.getHandId()) {
             return 1;
         }else {
             if (this.requiredHand.get(0).equals(this.requiredHand.get(2))) {
@@ -92,7 +92,7 @@ public class FullHouse implements Hand {
 
     @Override
     public String toString() {
-        String temp = "RequiredHand: ";
+        String temp = "Full House\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";

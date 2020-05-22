@@ -1,19 +1,18 @@
 package Hands;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class TwoPair implements Hand{
+public class StraightFlush implements Hand {
 
-    static final int handId = 7;
+
+    static final int handId = 1;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
-    public TwoPair(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
+
+    public StraightFlush(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
         this.requiredHand = new ArrayList<Integer>(aRequiredHand);
         this.kickers = new ArrayList<Integer>(aKickers);
-
-        Collections.sort(this.requiredHand);
     }
 
     @Override
@@ -23,30 +22,19 @@ public class TwoPair implements Hand{
         }else if(handId > o.getHandId()) {
             return 1;
         }else {
-            if (this.requiredHand.get(2) > o.getRequiredHand().get(2)) {
+            if (requiredHand.get(0) > o.getRequiredHand().get(0)) {
                 return -1;
-            }else if (this.requiredHand.get(2) < o.getRequiredHand().get(2)) {
+            }else if (requiredHand.get(0) < o.getRequiredHand().get(0)){
                 return 1;
             }else {
-                if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
-                    return -1;
-                }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
-                    return 1;
-                }else {
-                    if (kickers.get(0) > o.getKickers().get(0)) {
-                        return -1;
-                    }else if (kickers.get(0) < o.getKickers().get(0)) {
-                        return 1;
-                    }
-                }
+                return 0;
             }
         }
-        return 0;
     }
 
     @Override
     public String toString() {
-        String temp = "Two Pair\nRequiredHand: ";
+        String temp = "StraightFlush\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";
@@ -78,10 +66,10 @@ public class TwoPair implements Hand{
     }
 
     public ArrayList<Integer> getRequiredHand() {
-        return this.requiredHand;
+        return requiredHand;
     }
 
     public ArrayList<Integer> getKickers() {
-        return this.kickers;
+        return kickers;
     }
 }

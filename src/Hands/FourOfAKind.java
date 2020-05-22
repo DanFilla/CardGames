@@ -3,13 +3,13 @@ package Hands;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TwoPair implements Hand{
+public class FourOfAKind implements Hand {
 
-    static final int handId = 7;
+    static final int handId = 2;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
-    public TwoPair(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
+    public FourOfAKind(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
         this.requiredHand = new ArrayList<Integer>(aRequiredHand);
         this.kickers = new ArrayList<Integer>(aKickers);
 
@@ -23,19 +23,15 @@ public class TwoPair implements Hand{
         }else if(handId > o.getHandId()) {
             return 1;
         }else {
-            if (this.requiredHand.get(2) > o.getRequiredHand().get(2)) {
+            if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
                 return -1;
-            }else if (this.requiredHand.get(2) < o.getRequiredHand().get(2)) {
+            }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
                 return 1;
             }else {
-                if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
-                    return -1;
-                }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
-                    return 1;
-                }else {
-                    if (kickers.get(0) > o.getKickers().get(0)) {
+                for (int i=this.kickers.size()-1; i>=0; i--) {
+                    if (this.kickers.get(i) > o.getKickers().get(i)) {
                         return -1;
-                    }else if (kickers.get(0) < o.getKickers().get(0)) {
+                    } else if (this.kickers.get(i) < o.getKickers().get(i)) {
                         return 1;
                     }
                 }
@@ -46,7 +42,7 @@ public class TwoPair implements Hand{
 
     @Override
     public String toString() {
-        String temp = "Two Pair\nRequiredHand: ";
+        String temp = "Four of a kind\nRequiredHand: ";
 
         for (Integer card : this.requiredHand) {
             temp += card.toString() + " ";
@@ -60,13 +56,13 @@ public class TwoPair implements Hand{
     }
 
     public boolean equals(Hand o) {
-        for (int j=0; j<requiredHand.size(); j++) {
-            if (!requiredHand.get(j).equals(o.getRequiredHand().get(j))) {
+        for (int j=0; j<this.requiredHand.size(); j++) {
+            if (!this.requiredHand.get(j).equals(o.getRequiredHand().get(j))) {
                 return false;
             }
         }
-        for (int k=0; k<kickers.size(); k++) {
-            if (!kickers.get(k).equals(o.getKickers().get(k))) {
+        for (int k=0; k<this.kickers.size(); k++) {
+            if (!this.kickers.get(k).equals(o.getKickers().get(k))) {
                 return false;
             }
         }

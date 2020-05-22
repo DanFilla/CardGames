@@ -1,0 +1,36 @@
+
+
+*** John's three of a kind should be a fullhouse ***
+
+You are betting on round 3
+[3H, 8C, 3S, 3C, QS]
+The bet to call is 0
+Dan's hand is: 6C 2S
+How much would Dan like to bet?
+0
+The bet to call is 0
+John's hand is: QD QH
+How much would John like to bet?
+0
+The bet to call is 0
+Corey's hand is: 10H 8S
+How much would Corey like to bet?
+0
+
+Winner
+Corey's hand is: 10H 8S
+Full House
+RequiredHand: 3 3 3 8 8
+KickerCards:
+
+Losers
+
+John's hand is: QD QH
+Three of a kind
+RequiredHand: 3 3 3
+KickerCards: 12 12
+
+Dan's hand is: 6C 2S
+Three of a kind
+RequiredHand: 3 3 3
+KickerCards: 12 8
