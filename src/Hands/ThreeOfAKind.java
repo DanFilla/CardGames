@@ -6,7 +6,7 @@ import java.util.Collections;
 public class ThreeOfAKind implements Hand {
 
 
-    static final int handId = 7;
+    static final int handId = 6;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
@@ -29,10 +29,10 @@ public class ThreeOfAKind implements Hand {
             }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)) {
                 return 1;
             }else {
-                for (int i=kickers.size()-1; i>=0; i--) {
-                    if (kickers.get(i) > o.getKickers().get(i)) {
+                for (int i=this.kickers.size()-1; i>=0; i--) {
+                    if (this.kickers.get(i) > o.getKickers().get(i)) {
                         return -1;
-                    } else if (kickers.get(i) < o.getKickers().get(i)) {
+                    } else if (this.kickers.get(i) < o.getKickers().get(i)) {
                         return 1;
                     }
                 }
@@ -57,13 +57,13 @@ public class ThreeOfAKind implements Hand {
     }
 
     public boolean equals(Hand o) {
-        for (int j=0; j<requiredHand.size(); j++) {
-            if (!requiredHand.get(j).equals(o.getRequiredHand().get(j))) {
+        for (int j=0; j<this.requiredHand.size(); j++) {
+            if (!this.requiredHand.get(j).equals(o.getRequiredHand().get(j))) {
                 return false;
             }
         }
-        for (int k=0; k<kickers.size(); k++) {
-            if (!kickers.get(k).equals(o.getKickers().get(k))) {
+        for (int k=0; k<this.kickers.size(); k++) {
+            if (!this.kickers.get(k).equals(o.getKickers().get(k))) {
                 return false;
             }
         }

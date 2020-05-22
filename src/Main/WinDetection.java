@@ -82,15 +82,19 @@ public class WinDetection {
 	}
 
 	private static Boolean isStraight(ArrayList<Integer> hand) {
+		requiredCards.clear();
+
 		int count = 0;
+
 		for (int i=1; i<hand.size(); i++) {
 			if (hand.get(i) - hand.get(i - 1) == 1) {
-				if (highCard < hand.get(i)) {
-					highCard = hand.get(i);
+				if (count == 0) {
+					requiredCards.add(hand.get(i-1));
 				}
+				requiredCards.add(hand.get(i));
 				count += 1;
 			}else {
-				highCard = 0;
+				requiredCards.clear();
 				count = 0;
 			}
 			if (count > 3){
@@ -101,50 +105,83 @@ public class WinDetection {
 
 	}
 
+	private static void parseAndAdd(ArrayList<Card> reqCards) {
+		for (Card card : reqCards) {
+			requiredCards.add(card.getCardNumberAsInt());
+		}
+	}
+
 	private static Boolean isFlush(ArrayList<Card> hand) {
-		//                 H  C  D  S
-		int[] suites =    {0, 0, 0, 0};
-		int[] highCards = {0, 0, 0, 0};
+
+		ArrayList<Card> hearts = new ArrayList<>();
+		ArrayList<Card> diamonds = new ArrayList<>();
+		ArrayList<Card> spades = new ArrayList<>();
+		ArrayList<Card> clubs = new ArrayList<>();
 
 		for (Card card : hand) {
-			int cardNum = card.getCardNumberAsInt();
-
 			if (card.getSuite().equals("H")) {
-				if (cardNum > highCards[0]) {
-					highCards[0] = cardNum;
-				}
-				suites[0]++;
-			} else if (card.getSuite().equals("C")) {
-				if (cardNum > highCards[1]) {
-					highCards[1] = cardNum;
-				}
-				suites[1]++;
-			} else if (card.getSuite().equals("D")) {
-				if (cardNum > highCards[2]) {
-					highCards[2] = cardNum;
-				}
-				suites[2]++;
-			} else if (card.getSuite().equals("S")) {
-				if (cardNum > highCards[3]) {
-					highCards[3] = cardNum;
-				}
-				suites[3]++;
+				hearts.add(card);
+			}else if (card.getSuite().equals("D")) {
+				diamonds.add(card);
+			}else if (card.getSuite().equals("S")) {
+				spades.add(card);
+			}else if (card.getSuite().equals("C")) {
+				clubs.add(card);
 			}
 		}
 
-		for (int i=0; i<suites.length; i++) {
-			if (suites[i] > 4) {
-				highCard = highCards[i];
-				return true;
-			}
+		if (hearts.size() >= 5) {
+			parseAndAdd(hearts);
+			return true;
+		}else if (diamonds.size() >= 5) {
+			parseAndAdd(diamonds);
+			return true;
+		}else if (spades.size() >= 5) {
+			parseAndAdd(spades);
+			return true;
+		}else if (clubs.size() >= 5) {
+			parseAndAdd(clubs);
+			return true;
 		}
+
 		return false;
-
 	}
 
 	private static Boolean isFullHouse(ArrayList<Integer> hand) {
-		return false;
+		boolean includesThreeOfAKind = false;
+		boolean includesPair = false;
 
+		int handSize = hand.size()-1;
+
+		int count = 0;
+		for (int i=1; i<hand.size(); i++) {
+			if (hand.get(i-1).equals(hand.get(i))){
+				count++;
+			}else {
+				if (count == 1) {
+					requiredCards.add(hand.get(i-1));
+					requiredCards.add(hand.get(i-1));
+					includesPair = true;
+				}else if (count == 2) {
+					requiredCards.add(hand.get(i-1));
+					requiredCards.add(hand.get(i-1));
+					requiredCards.add(hand.get(i-1));
+					includesThreeOfAKind = true;
+				}
+				count = 0;
+			}
+		}
+		if (count == 1) {
+			requiredCards.add(hand.get(handSize));
+			requiredCards.add(hand.get(handSize));
+			includesPair = true;
+		}else if (count == 2) {
+			requiredCards.add(hand.get(handSize));
+			requiredCards.add(hand.get(handSize));
+			requiredCards.add(hand.get(handSize));
+			includesThreeOfAKind = true;
+		}
+		return includesPair && includesThreeOfAKind;
 	}
 
 	private static Boolean isFourOfAKind(ArrayList<Integer> hand) {
@@ -213,7 +250,16 @@ public class WinDetection {
 //			formattedMap.put("handId", 9);
 //		}
 
-		if(isThreeOfAKind(parsedHand)) {
+		if(isFullHouse(parsedHand)) {
+			getKickerSet(requiredCards, parsedHand);
+			return new FullHouse(requiredCards, kickerSet);
+		}else if(isFlush(hand)) {
+			getKickerSet(requiredCards, parsedHand);
+			return new Flush(requiredCards, kickerSet);
+		}else if(isStraight(parsedHand)) {
+			getKickerSet(requiredCards, parsedHand);
+			return new Straight(requiredCards, kickerSet);
+		}else if(isThreeOfAKind(parsedHand)) {
 			getKickerSet(requiredCards, parsedHand);
 			return new ThreeOfAKind(requiredCards, kickerSet);
 		}else if (isTwoPair(parsedHand)) {
@@ -222,9 +268,9 @@ public class WinDetection {
 		}else if(isOnePair(parsedHand)) {
 			getKickerSet(requiredCards, parsedHand);
 			return new OnePair(requiredCards, kickerSet);
+		}else {
+			return new OnePair(requiredCards, kickerSet);
 		}
-
-		return new OnePair(requiredCards, kickerSet);
 
 	}
 

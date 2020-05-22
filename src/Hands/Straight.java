@@ -1,18 +1,15 @@
 package Hands;
 
-import Main.*;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class OnePair implements Hand {
+public class Straight implements Hand {
 
-    static final int handId = 8;
+    static final int handId = 5;
     private ArrayList<Integer> requiredHand = new ArrayList<>();
     private ArrayList<Integer> kickers = new ArrayList<>();
 
 
-    public OnePair(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
+    public Straight(ArrayList<Integer> aRequiredHand, ArrayList<Integer> aKickers) {
         this.requiredHand = new ArrayList<Integer>(aRequiredHand);
         this.kickers = new ArrayList<Integer>(aKickers);
     }
@@ -24,22 +21,14 @@ public class OnePair implements Hand {
         }else if(handId < o.getHandId()) {
             return 1;
         }else {
-            if (this.requiredHand.get(0) > o.getRequiredHand().get(0)) {
+            if (requiredHand.get(0) > o.getRequiredHand().get(0)) {
                 return -1;
-            }else if (this.requiredHand.get(0) < o.getRequiredHand().get(0)){
+            }else if (requiredHand.get(0) < o.getRequiredHand().get(0)){
                 return 1;
             }else {
-                for (int i=this.kickers.size()-1; i>=0; i--) {
-                    if (this.kickers.get(i) > o.getKickers().get(i)) {
-                        return -1;
-                    }else if (this.kickers.get(i) < o.getKickers().get(i)) {
-                        return 1;
-                    }
-                }
+                return 0;
             }
-
         }
-        return 0;
     }
 
     @Override
@@ -63,8 +52,8 @@ public class OnePair implements Hand {
                 return false;
             }
         }
-        for (int k=0; k<this.kickers.size(); k++) {
-            if (!this.kickers.get(k).equals(o.getKickers().get(k))) {
+        for (int k=0; k<kickers.size(); k++) {
+            if (!kickers.get(k).equals(o.getKickers().get(k))) {
                 return false;
             }
         }
@@ -76,11 +65,10 @@ public class OnePair implements Hand {
     }
 
     public ArrayList<Integer> getRequiredHand() {
-        return this.requiredHand;
+        return requiredHand;
     }
 
     public ArrayList<Integer> getKickers() {
-        return this.kickers;
+        return kickers;
     }
 }
-
