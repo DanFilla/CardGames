@@ -32,6 +32,7 @@ public class WinDetection {
 		}
 	}
 
+	//TODO HighCard outputs the cards in reverse order.
 	private static void createHighCardSet(ArrayList<Integer> hand) {
 		requiredCards.clear();
 

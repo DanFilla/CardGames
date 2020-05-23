@@ -1,5 +1,4 @@
 
-
 *** John's three of a kind should be a fullhouse ***
 
 You are betting on round 3
@@ -34,3 +33,108 @@ Dan's hand is: 6C 2S
 Three of a kind
 RequiredHand: 3 3 3
 KickerCards: 12 8
+_____________________________
+
+**** Johns hand should not have been better than Sandys. *****
+You are betting on round 1
+[8D, 6S, JS]
+You are betting on round 2
+[8D, 6S, JS, AD]
+You are betting on round 3
+[8D, 6S, JS, AD, 5D]
+
+Winner
+Dan's hand is: 2D 10D
+Flush
+RequiredHand: 2 5 8 10 14
+KickerCards:
+
+Losers
+
+Corey's hand is: 4S 7H
+Straight
+RequiredHand: 4 5 6 7 8
+KickerCards:
+
+Chris's hand is: 6D AC
+Two Pair
+RequiredHand: 6 6 14 14
+KickerCards: 11
+
+John's hand is: QH 4H
+High Card
+RequiredHand: 14 12 11 8 6
+KickerCards:
+
+Sandy's hand is: KC 2C
+High Card
+RequiredHand: 14 13 11 8 6
+KickerCards:
+____________________________________
+
+*** expected error in finding two pair. see TODO.
+You are betting on round 1
+[9D, AS, 7D]
+You are betting on round 2
+[9D, AS, 7D, 2H]
+You are betting on round 3
+[9D, AS, 7D, 2H, AC]
+
+Winner
+John's hand is: 2C 7C
+Two Pair
+RequiredHand: 2 2 7 7 14 14
+KickerCards:
+
+Losers
+
+Chris's hand is: KS QC
+One Pair
+RequiredHand: 14 14
+KickerCards: 13 12 9
+
+Sandy's hand is: 4C KC
+One Pair
+RequiredHand: 14 14
+KickerCards: 13 9 7
+
+Dan's hand is: 4H 10S
+One Pair
+RequiredHand: 14 14
+KickerCards: 10 9 7
+
+Corey's hand is: 6H 5C
+One Pair
+RequiredHand: 14 14
+KickerCards: 9 7 6
+____________________________________
+
+*** compile error ***
+How many players are playing?
+test
+You are betting on round 1
+[6D, QC, 5S]
+You are betting on round 2
+[6D, QC, 5S, 3D]
+You are betting on round 3
+[6D, QC, 5S, 3D, 3S]
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:373)
+	at java.base/java.util.ArrayList.get(ArrayList.java:426)
+	at Hands.TwoPair.compareTo(TwoPair.java:36)
+	at Main.Player.compareTo(Player.java:35)
+	at Main.Player.compareTo(Player.java:9)
+	at java.base/java.util.ComparableTimSort.countRunAndMakeAscending(ComparableTimSort.java:325)
+	at java.base/java.util.ComparableTimSort.sort(ComparableTimSort.java:188)
+	at java.base/java.util.Arrays.sort(Arrays.java:1106)
+	at java.base/java.util.Arrays.sort(Arrays.java:1300)
+	at java.base/java.util.ArrayList.sort(ArrayList.java:1720)
+	at java.base/java.util.Collections.sort(Collections.java:145)
+	at Tests.TestRun.<init>(TestRun.java:53)
+	at Main.Poker.<init>(Poker.java:24)
+	at Main.Main.main(Main.java:6)
+
+Process finished with exit code 1

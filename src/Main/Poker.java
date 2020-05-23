@@ -1,5 +1,7 @@
 package Main;
 
+import Tests.TestRun;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -18,6 +20,11 @@ public class Poker {
 
 		System.out.println("How many players are playing?");
 		String numPlayers = input.nextLine();
+		if (numPlayers.equals("test")) {
+			TestRun test = new TestRun();
+			return;
+		}
+
 		int numPlayersString = Integer.parseInt(numPlayers);
 
 		for (int i=0; i<numPlayersString; i++) {
