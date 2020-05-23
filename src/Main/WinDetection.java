@@ -32,13 +32,12 @@ public class WinDetection {
 		}
 	}
 
-	//TODO HighCard outputs the cards in reverse order.
 	private static void createHighCardSet(ArrayList<Integer> hand) {
 		requiredCards.clear();
 
 		int counter = 0;
 		for (int i=hand.size()-1; counter<5; i--) {
-			requiredCards.add(hand.get(i));
+			requiredCards.add(0, hand.get(i));
 			counter++;
 		}
 	}
@@ -58,17 +57,26 @@ public class WinDetection {
 
 	private static Boolean isTwoPair(ArrayList<Integer> hand) {
 		requiredCards.clear();
+		ArrayList<Integer> tempList = new ArrayList<>();
 
 		int count = 0;
 
 		for (int i=0; i<hand.size()-1; i++) {
 			if (hand.subList(i+1, hand.size()).contains(hand.get(i))) {
-				requiredCards.add(hand.get(i));
-				requiredCards.add(hand.get(i));
+				tempList.add(hand.get(i));
+				tempList.add(hand.get(i));
 				count++;
 			}
 		}
-		return count > 1;
+		if (count == 2) {
+			requiredCards.addAll(tempList);
+			return true;
+		}else if (count > 2) {
+			requiredCards.addAll(tempList.subList(2, 6));
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	private static Boolean isThreeOfAKind(ArrayList<Integer> hand) {

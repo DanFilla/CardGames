@@ -36,6 +36,8 @@ KickerCards: 12 8
 _____________________________
 
 **** Johns hand should not have been better than Sandys. *****
+
+//TODO I believe the high card hand is being checked backwards.
 You are betting on round 1
 [8D, 6S, JS]
 You are betting on round 2
@@ -70,6 +72,45 @@ Sandy's hand is: KC 2C
 High Card
 RequiredHand: 14 13 11 8 6
 KickerCards:
+_______________________________
+
+**** more problems with the highCard winDecection ****
+You are betting on round 1
+[8H, 6H, JC]
+You are betting on round 2
+[8H, 6H, JC, KS]
+You are betting on round 3
+[8H, 6H, JC, KS, QC]
+TIE
+
+Winner
+Dan's hand is: QS 10H
+One Pair
+RequiredHand: 12 12
+KickerCards: 13 11 10
+
+Losers
+
+Corey's hand is: 7C JS
+One Pair
+RequiredHand: 11 11
+KickerCards: 13 12 8
+
+John's hand is: 5H 10C
+High Card
+RequiredHand: 13 12 11 10 8
+KickerCards:
+
+Sandy's hand is: 10S 5C
+High Card
+RequiredHand: 13 12 11 10 8
+KickerCards:
+
+Chris's hand is: 3H AS
+High Card
+RequiredHand: 14 13 12 11 8
+KickerCards:
+
 ____________________________________
 
 *** expected error in finding two pair. see TODO.
@@ -138,3 +179,42 @@ Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of b
 	at Main.Main.main(Main.java:6)
 
 Process finished with exit code 1
+
+_____________________________________________
+
+****** Dans flush should not have beaten coreys flush ******
+You are betting on round 1
+[4H, 2D, QD]
+You are betting on round 2
+[4H, 2D, QD, AD]
+You are betting on round 3
+[4H, 2D, QD, AD, 7D]
+
+Winner
+Dan's hand is: QS 3D
+Flush
+RequiredHand: 2 3 7 12 14
+KickerCards:
+
+Losers
+
+Corey's hand is: 10D 6S
+Flush
+RequiredHand: 2 7 10 12 14
+KickerCards:
+
+Sandy's hand is: 2S 7C
+Two Pair
+RequiredHand: 2 2 7 7
+KickerCards: 14
+
+John's hand is: 4S 2H
+Two Pair
+RequiredHand: 2 2 4 4
+KickerCards: 14
+
+Chris's hand is: KC 3C
+High Card
+RequiredHand: 14 13 12 7 4
+KickerCards:
+

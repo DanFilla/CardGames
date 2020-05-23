@@ -80,8 +80,6 @@ public class WinDetectionTests {
         assertSame(expected2, handList.get(0));
     }
 
-    //TODO flaw where construction will not find the best two pair if there are three
-    //possible pairs on the table.
     @Test
     public void testTwoPairConstruction() {
 
