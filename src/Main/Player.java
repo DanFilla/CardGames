@@ -41,6 +41,10 @@ public class Player implements Comparable<Player>{
         }
     }
 
+	public void addToBank(int amountWon) {
+		this.bank += amountWon;
+	}
+
 	public boolean equals(Player p) {
 		if (this.bestHand.getHandId() == p.getBestHand().getHandId()) {
 			return this.bestHand.equals(p.getBestHand());
@@ -130,6 +134,7 @@ public class Player implements Comparable<Player>{
         for (Card acard : hand) {
             str += " " + acard;
         }
+		str += "\n" + this.name + " has " + this.bank + " dollars.";
         return str;
     }
 }

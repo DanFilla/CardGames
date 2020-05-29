@@ -174,7 +174,6 @@ public class WinDetection {
 		return false;
 	}
 
-	//TODO Not working properly. See notes.
 	private static Boolean isFullHouse(ArrayList<Integer> hand) {
 		requiredCards.clear();
 

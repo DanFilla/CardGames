@@ -64,6 +64,7 @@ public class Poker {
 				count++;
 			}else {
 				if (count < 1) {
+					pot.givePotToPlayer(players.get(0));
 					System.out.println("\nWinner");
 					System.out.println(players.get(0));
 					System.out.println(players.get(0).getBestHand());

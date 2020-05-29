@@ -13,6 +13,11 @@ public class Betting {
 		this.pot = 0;
 	}
 
+	public void givePotToPlayer(Player person) {
+		person.addToBank(this.pot);
+		this.clearPot();
+	}
+
 	private void addToPot(int betFromPlayer) {
 		this.pot += betFromPlayer;
 	}
