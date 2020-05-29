@@ -23,8 +23,7 @@ public class TestRun {
         String[] pla = {"Dan", "John", "Corey", "Sandy", "Chris"};
 
         for (String x : pla) {
-            String name = x;
-            players.add(new Player(name));
+            players.add(new Player(x));
         }
 
         // Deal the cards to the players
@@ -52,22 +51,51 @@ public class TestRun {
 
         Collections.sort(players);
 
+        int count = 0;
         for (int q=1; q<players.size(); q++) {
             if (players.get(q-1).equals(players.get(q))){
-                System.out.println("TIE");
-            };
+                count++;
+            }else {
+                if (count < 1) {
+                    System.out.println("\nWinner");
+                    System.out.println(players.get(0));
+                    System.out.println(players.get(0).getBestHand());
+                    break;
+                }else {
+                    System.out.println("\nTie Between");
+                    for (int d=0; d<=count; d++) {
+                        System.out.println(players.get(d));
+                        System.out.println(players.get(d).getBestHand());
+                        System.out.println("This is a test.");
+                    }
+                    break;
+                }
+            }
         }
 
-        System.out.println("\nWinner");
-        System.out.println(players.get(0));
-        System.out.println(players.get(0).getBestHand());
-
         System.out.println("\nLosers");
-        for (int o=1; o<players.size(); o++) {
+        for (int o=count+1; o<players.size(); o++) {
             System.out.println("");
             System.out.println(players.get(o));
             System.out.println(players.get(o).getBestHand());
         }
+
+//        for (int q=1; q<players.size(); q++) {
+//            if (players.get(q-1).equals(players.get(q))){
+//                System.out.println("TIE");
+//            };
+//        }
+//
+//        System.out.println("\nWinner");
+//        System.out.println(players.get(0));
+//        System.out.println(players.get(0).getBestHand());
+//
+//        System.out.println("\nLosers");
+//        for (int o=1; o<players.size(); o++) {
+//            System.out.println("");
+//            System.out.println(players.get(o));
+//            System.out.println(players.get(o).getBestHand());
+//        }
 
 //		Player winner = players.get(0);
 //

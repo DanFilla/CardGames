@@ -15,6 +15,38 @@ import static org.junit.Assert.*;
 public class WinDetectionTests {
 
     @Test
+    public void testHighCardCompareTo() {
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(11);
+        reqCards.add(9);
+        reqCards.add(7);
+        reqCards.add(5);
+        reqCards.add(2);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+
+        Hand expected = new HighCard(reqCards, kickerSet);
+
+        ArrayList<Integer> reqCards2 = new ArrayList<>();
+        reqCards2.add(11);
+        reqCards2.add(9);
+        reqCards2.add(7);
+        reqCards2.add(5);
+        reqCards2.add(3);
+        ArrayList<Integer> kickerSet2 = new ArrayList<>();
+
+        Hand expected2 = new HighCard(reqCards2, kickerSet2);
+
+        ArrayList<Hand> handList = new ArrayList<>();
+        handList.add(expected);
+        handList.add(expected2);
+
+        Collections.sort(handList);
+
+
+        assertSame(expected2, handList.get(0));
+    }
+
+    @Test
     public void testOnePairConstruction() {
 
         ArrayList<Card> flop = new ArrayList<>();
@@ -341,6 +373,40 @@ public class WinDetectionTests {
         Collections.sort(handList);
 
         assertSame(expected2, handList.get(0));
+    }
+    //[3H, 8C, 3S, 3C, QS] Q Q
+    @Test
+    public void testFullHouseConstructionTwo() {
+        //test for three of a kind.
+        ArrayList<Card> flop = new ArrayList<>();
+        flop.add(new Card("3", "D"));
+        flop.add(new Card("3", "S"));
+        flop.add(new Card("10", "S"));
+        flop.add(new Card("6", "D"));
+        flop.add(new Card("Q", "H"));
+        flop.add(new Card("Q", "C"));
+        flop.add(new Card("Q", "D"));
+
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(12);
+        reqCards.add(12);
+        reqCards.add(12);
+        reqCards.add(3);
+        reqCards.add(3);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+
+        Hand expected = new FullHouse(reqCards, kickerSet);
+        Hand actual = WinDetection.bestPokerHand(flop);
+
+        assertEquals(expected.getHandId(), actual.getHandId());
+
+        for (int i=0; i<reqCards.size(); i++) {
+            assertEquals(expected.getRequiredHand().get(i), actual.getRequiredHand().get(i));
+        }
+
+        for (int j=0; j<expected.getKickers().size(); j++) {
+            assertEquals(expected.getKickers().get(j), actual.getKickers().get(j));
+        }
     }
 
     @Test

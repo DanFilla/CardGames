@@ -22,7 +22,7 @@ public class HighCard implements Hand {
         }else if(handId > o.getHandId()) {
             return 1;
         }else {
-            for (int i=this.requiredHand.size()-1; i>0; i--) {
+            for (int i=this.requiredHand.size()-1; i>=0; i--) {
                 if (this.requiredHand.get(i) < o.getRequiredHand().get(i)) {
                     return 1;
                 }else if (this.requiredHand.get(i) > o.getRequiredHand().get(i)) {

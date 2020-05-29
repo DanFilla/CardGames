@@ -218,3 +218,131 @@ High Card
 RequiredHand: 14 13 12 7 4
 KickerCards:
 
+_____________________________________
+
+**** Full House compile error *****
+
+You are betting on round 1
+[6S, 6C, 3S]
+You are betting on round 2
+[6S, 6C, 3S, 4D]
+You are betting on round 3
+[6S, 6C, 3S, 4D, 3H]
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 6 out of bounds for length 5
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:373)
+	at java.base/java.util.ArrayList.get(ArrayList.java:426)
+	at Hands.FullHouse.compareTo(FullHouse.java:46)
+	at Main.Player.compareTo(Player.java:35)
+	at Main.Player.compareTo(Player.java:9)
+	at java.base/java.util.ComparableTimSort.binarySort(ComparableTimSort.java:262)
+	at java.base/java.util.ComparableTimSort.sort(ComparableTimSort.java:189)
+	at java.base/java.util.Arrays.sort(Arrays.java:1106)
+	at java.base/java.util.Arrays.sort(Arrays.java:1300)
+	at java.base/java.util.ArrayList.sort(ArrayList.java:1720)
+	at java.base/java.util.Collections.sort(Collections.java:145)
+	at Tests.TestRun.<init>(TestRun.java:52)
+	at Main.Poker.<init>(Poker.java:24)
+	at Main.Main.main(Main.java:6)
+
+Process finished with exit code 1
+
+******* could possibly be related to this ******
+
+You are betting on round 1
+[5C, QS, QC]
+You are betting on round 2
+[5C, QS, QC, 10D]
+You are betting on round 3
+[5C, QS, QC, 10D, QH]
+
+Winner
+Chris's hand is: 10C 5D
+Full House
+RequiredHand: 5 5 10 10 12 12 12
+KickerCards:
+
+_______________________________________
+
+*** FullHouse was not compared properly ***
+
+How many players are playing?
+
+You are betting on round 1
+[JC, 5C, JH]
+You are betting on round 2
+[JC, 5C, JH, 3H]
+You are betting on round 3
+[JC, 5C, JH, 3H, 3D]
+
+Winner
+Dan's hand is: 3C 8H
+Full House
+RequiredHand: 3 3 3 11 11
+KickerCards:
+
+Losers
+
+Sandy's hand is: AS JD
+Full House
+RequiredHand: 3 3 11 11 11
+KickerCards:
+
+Chris's hand is: 5S 10D
+Two Pair
+RequiredHand: 5 5 11 11
+KickerCards: 10
+
+John's hand is: 5H 9D
+Two Pair
+RequiredHand: 5 5 11 11
+KickerCards: 9
+
+Corey's hand is: 10S 6D
+Two Pair
+RequiredHand: 3 3 11 11
+KickerCards: 10
+
+_________________________________-
+
+*** Did not detect full house ***
+
+How many players are playing?
+
+You are betting on round 1
+[JC, JD, 2H]
+You are betting on round 2
+[JC, JD, 2H, JH]
+You are betting on round 3
+[JC, JD, 2H, JH, 10C]
+
+Winner
+Dan's hand is: AS QH
+Three of a kind
+RequiredHand: 11 11 11
+KickerCards: 14 12
+
+Losers
+
+Chris's hand is: 10S 6S
+Three of a kind
+RequiredHand: 11 11 11
+KickerCards: 10 10
+
+Corey's hand is: 9C 2C
+Three of a kind
+RequiredHand: 11 11 11
+KickerCards: 10 9
+
+Sandy's hand is: 4D 9D
+Three of a kind
+RequiredHand: 11 11 11
+KickerCards: 10 9
+
+John's hand is: 5C 6H
+Three of a kind
+RequiredHand: 11 11 11
+KickerCards: 10 6
+

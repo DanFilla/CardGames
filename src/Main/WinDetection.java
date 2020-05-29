@@ -100,13 +100,17 @@ public class WinDetection {
 		return false;
 	}
 
+	//TODO problem where if there are two straights on the board only the
+	//first detected straight will be used.
 	private static Boolean isStraight(ArrayList<Integer> hand) {
 		requiredCards.clear();
+
+		Collections.reverse(hand);
 
 		int count = 0;
 
 		for (int i=1; i<hand.size(); i++) {
-			if (hand.get(i) - hand.get(i - 1) == 1) {
+			if (hand.get(i) - hand.get(i - 1) == -1) {
 				if (count == 0) {
 					requiredCards.add(hand.get(i-1));
 				}
@@ -117,9 +121,12 @@ public class WinDetection {
 				count = 0;
 			}
 			if (count > 3){
+				Collections.reverse(hand);
+				Collections.reverse(requiredCards);
 				return true;
 			}
 		}
+		Collections.reverse(hand);
 		return false;
 
 	}
@@ -170,41 +177,32 @@ public class WinDetection {
 	//TODO Not working properly. See notes.
 	private static Boolean isFullHouse(ArrayList<Integer> hand) {
 		requiredCards.clear();
-		boolean includesThreeOfAKind = false;
-		boolean includesPair = false;
 
-		int handSize = hand.size()-1;
-
-		int count = 0;
-		for (int i=1; i<hand.size(); i++) {
-			if (hand.get(i-1).equals(hand.get(i))){
-				count++;
-			}else {
-				if (count == 1) {
-					requiredCards.add(hand.get(i-1));
-					requiredCards.add(hand.get(i-1));
-					includesPair = true;
-				}else if (count == 2) {
-					requiredCards.add(hand.get(i-1));
-					requiredCards.add(hand.get(i-1));
-					requiredCards.add(hand.get(i-1));
-					includesThreeOfAKind = true;
-				}
-				count = 0;
+		//look for a three of a kind if located then look for a pair after removing
+		//the three of a kind.
+		for (int i = 0; i < hand.size() - 2; i++) {
+			if (hand.get(i).equals(hand.get(i + 1)) && hand.get(i).equals(hand.get(i + 2))) {
+				requiredCards.add(hand.get(i));
+				requiredCards.add(hand.get(i));
+				requiredCards.add(hand.get(i));
 			}
 		}
-		if (count == 1) {
-			requiredCards.add(hand.get(handSize));
-			requiredCards.add(hand.get(handSize));
-			includesPair = true;
-		}else if (count == 2) {
-			requiredCards.add(hand.get(handSize));
-			requiredCards.add(hand.get(handSize));
-			requiredCards.add(hand.get(handSize));
-			includesThreeOfAKind = true;
+
+		if (requiredCards.size() > 0) {
+			for (int i = 0; i < hand.size() - 1; i++) {
+				if (hand.subList(i + 1, hand.size()).contains(hand.get(i)) && !requiredCards.contains(hand.get(i))) {
+					requiredCards.add(hand.get(i));
+					requiredCards.add(hand.get(i));
+//					Collections.sort(requiredCards);
+					return true;
+				}
+			}
+
 		}
-		return includesPair && includesThreeOfAKind;
+		return false;
 	}
+
+
 
 	private static Boolean isFourOfAKind(ArrayList<Integer> hand) {
 		requiredCards.clear();

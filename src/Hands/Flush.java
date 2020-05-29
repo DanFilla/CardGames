@@ -25,15 +25,15 @@ public class Flush implements Hand {
         }else if(handId > o.getHandId()) {
             return 1;
         }else {
-            if (requiredHand.get(requiredHand.size()-1) > o.getRequiredHand().get(requiredHand.size()-1)) {
-                return -1;
-            }else if (requiredHand.get(requiredHand.size()-1) < o.getRequiredHand().get(requiredHand.size()-1)){
-                return 1;
-            }else {
-                return 0;
+            for (int i=this.requiredHand.size()-1; i>=0; i--) {
+                if (this.requiredHand.get(i) < o.getRequiredHand().get(i)) {
+                    return 1;
+                }else if (this.requiredHand.get(i) > o.getRequiredHand().get(i)) {
+                    return -1;
+                }
             }
-
         }
+        return 0;
     }
 
     @Override

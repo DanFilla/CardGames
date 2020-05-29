@@ -14,7 +14,7 @@ public class FullHouse implements Hand {
         this.requiredHand = new ArrayList<Integer>(aRequiredHand);
         this.kickers = new ArrayList<Integer>(aKickers);
 
-        Collections.sort(this.requiredHand);
+        //Collections.sort(this.requiredHand);
     }
 
     //TODO horribly inefficient
@@ -51,6 +51,7 @@ public class FullHouse implements Hand {
             }
         }
         return 0;
+
 //
 //        if (handId > o.getHandId()) {
 //            return -1;

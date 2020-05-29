@@ -17,6 +17,10 @@ public class Betting {
 		this.pot += betFromPlayer;
 	}
 
+	private void clearPot() {
+		this.pot = 0;
+	}
+
 	public void bet(ArrayList<Player> playerList, ArrayList<Player> foldedPlayers) {
 		// Method will loop through players while checking the previous players bet. This previous bet
 		// is the minimum bet required to continue playing.
