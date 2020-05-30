@@ -1,4 +1,9 @@
 
+
+cmd that will run program
+java -classpath /Users/dan/Desktop/CardGames/out/production/CardGames/ Main.java
+
+
 *** John's three of a kind should be a fullhouse ***
 
 You are betting on round 3
@@ -346,3 +351,47 @@ Three of a kind
 RequiredHand: 11 11 11
 KickerCards: 10 6
 
+______________________________
+
+*** straight flush problems ***
+
+How many players are playing?
+
+You are betting on round 1
+[JH, 3C, 8H]
+You are betting on round 2
+[JH, 3C, 8H, 2C]
+You are betting on round 3
+[JH, 3C, 8H, 2C, 4C]
+
+Winner
+John's hand is: 5C 6C
+John has 500 dollars.
+StraightFlush
+RequiredHand: 2 3 4 5 6 2 3 4 5 6
+KickerCards:
+Losers
+
+Corey's hand is: AD JD
+Corey has 500 dollars.
+One Pair
+RequiredHand: 11 11
+KickerCards: 14 8 4
+
+Chris's hand is: JC 10S
+Chris has 500 dollars.
+One Pair
+RequiredHand: 11 11
+KickerCards: 10 8 4
+
+Sandy's hand is: QD 9D
+Sandy has 500 dollars.
+High Card
+RequiredHand: 4 8 9 11 12
+KickerCards:
+
+Dan's hand is: 6H 9S
+Dan has 500 dollars.
+High Card
+RequiredHand: 4 6 8 9 11
+KickerCards:

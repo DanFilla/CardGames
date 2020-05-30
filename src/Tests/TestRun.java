@@ -7,111 +7,97 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import java.io.*;
+
 public class TestRun {
     Scanner input = new Scanner(System.in);
-    Deck deck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Player> foldedPlayers = new ArrayList<>();
     private final ArrayList<Card> flop = new ArrayList<>();
 
-    public TestRun() {
-        Deck deck = new Deck();
-        Betting pot = new Betting();
+    public TestRun(int num) throws IOException {
+        for (int a=0; a<num; a++) {
+            Deck deck = new Deck();
+            Betting pot = new Betting();
 
-        int numPlayersString = 5;
+            FileWriter out = null;
+            FileWriter in = null;
 
-        String[] pla = {"Dan", "John", "Corey", "Sandy", "Chris"};
+            int numPlayersString = 5;
 
-        for (String x : pla) {
-            players.add(new Player(x));
-        }
+//            String[] pla = {"Dan", "John", "Corey", "Sandy", "Chris"};
+            String[] pla = {"Dan", "John"};
 
-        // Deal the cards to the players
-        for (Player xplay : players) {
-            xplay.draw(deck, 2);
-        }
-
-        // Loop for the entire deal session.
-        for (int j=0; j<3; j++) {
-            System.out.println("You are betting on round " + (j+1));
-            if (j == 0) {
-                deck.drawFlop(flop);
-            }else {
-                this.flop.add(deck.drawBurn());
+            for (String x : pla) {
+                players.add(new Player(x));
             }
-            System.out.println(this.flop);
+
+            // Deal the cards to the players
+            for (Player xplay : players) {
+                xplay.draw(deck, 2);
+            }
+
+            // Loop for the entire deal session.
+            for (int j = 0; j < 3; j++) {
+                System.out.println("You are betting on round " + (j + 1));
+                if (j == 0) {
+                    deck.drawFlop(flop);
+                } else {
+                    this.flop.add(deck.drawBurn());
+                }
+                System.out.println(this.flop);
 //            pot.bet(players, foldedPlayers);
-        }
+            }
 
-        for (Player p : players) {
-            ArrayList<Card> allCard = new ArrayList<>(this.flop);
-            allCard.addAll(p.getHand());
-            p.setBestHand(WinDetection.bestPokerHand(allCard));
-        }
+            for (Player p : players) {
+                ArrayList<Card> allCard = new ArrayList<>(this.flop);
+                allCard.addAll(p.getHand());
+                p.setBestHand(WinDetection.bestPokerHand(allCard));
+            }
 
-        Collections.sort(players);
+            Collections.sort(players);
 
-        int count = 0;
-        for (int q=1; q<players.size(); q++) {
-            if (players.get(q-1).equals(players.get(q))){
-                count++;
-            }else {
-                if (count < 1) {
-                    System.out.println("\nWinner");
-                    System.out.println(players.get(0));
-                    System.out.println(players.get(0).getBestHand());
-                    break;
-                }else {
-                    System.out.println("\nTie Between");
-                    for (int d=0; d<=count; d++) {
-                        System.out.println(players.get(d));
-                        System.out.println(players.get(d).getBestHand());
-                        System.out.println("This is a test.");
+//        out = new FileOutputStream("output.txt");
+
+            int count = 0;
+            for (int q = 1; q < players.size(); q++) {
+                if (players.get(q - 1).equals(players.get(q))) {
+                    count++;
+                } else {
+                    if (count < 1) {
+//                    System.out.println("\nWinner");
+//                    System.out.println(players.get(0));
+//                    System.out.println(players.get(0).getBestHand());
+                        try {
+                            out = new FileWriter("output.txt", true);
+                            out.write(players.get(0).getBestHand().toString());
+                        } finally {
+                            if (out != null) {
+                                out.close();
+                            }
+                        }
+                        break;
+                    } else {
+                        System.out.println("\nTie Between");
+                        for (int d = 0; d <= count; d++) {
+//                        System.out.println(players.get(d));
+//                        System.out.println(players.get(d).getBestHand());
+//                        System.out.println("\n");
+                        }
+                        break;
                     }
-                    break;
                 }
             }
-        }
 
-        System.out.println("\nLosers");
-        for (int o=count+1; o<players.size(); o++) {
-            System.out.println("");
-            System.out.println(players.get(o));
-            System.out.println(players.get(o).getBestHand());
-        }
-
-//        for (int q=1; q<players.size(); q++) {
-//            if (players.get(q-1).equals(players.get(q))){
-//                System.out.println("TIE");
-//            };
-//        }
-//
-//        System.out.println("\nWinner");
-//        System.out.println(players.get(0));
-//        System.out.println(players.get(0).getBestHand());
-//
-//        System.out.println("\nLosers");
-//        for (int o=1; o<players.size(); o++) {
+            System.out.println("\nLosers");
+            for (int o = count + 1; o < players.size(); o++) {
 //            System.out.println("");
 //            System.out.println(players.get(o));
 //            System.out.println(players.get(o).getBestHand());
-//        }
-
-//		Player winner = players.get(0);
-//
-//		for (Player y : players) {
-//			ArrayList<Card> allCard = new ArrayList<>(this.flop);
-//			allCard.addAll(y.getHand());
-//			y.setHandMap(WinDetection.bestPokerHand(allCard));
-//			if (y.getHandMap().get("handId") < winner.getHandMap().get("handId")) {
-//				winner = y;
-//			}else if (y.getHandMap().get("handId").equals(winner.getHandMap().get("handId")) && y.getHandMap().get("highCard") > winner.getHandMap().get("highCard")) {
-//				winner = y;
-//			}
-//		}
-//		System.out.println(winner.getName());
-//		System.out.println(WinDetection.getHandName(winner.getHandMap().get("handId")));
-
-
+            }
+            players.clear();
+            foldedPlayers.clear();
+            flop.clear();
+        }
     }
 }

@@ -20,10 +20,6 @@ public class Poker {
 
 		System.out.println("How many players are playing?");
 		String numPlayers = input.nextLine();
-		if (numPlayers.equals("")) {
-			TestRun test = new TestRun();
-			return;
-		}
 
 		int numPlayersString = Integer.parseInt(numPlayers);
 
@@ -74,7 +70,7 @@ public class Poker {
 					for (int d=0; d<=count; d++) {
 						System.out.println(players.get(d));
 						System.out.println(players.get(d).getBestHand());
-						System.out.println("This is a test.");
+						System.out.println("\n");
 					}
 					break;
 				}

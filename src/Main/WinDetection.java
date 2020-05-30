@@ -100,8 +100,6 @@ public class WinDetection {
 		return false;
 	}
 
-	//TODO problem where if there are two straights on the board only the
-	//first detected straight will be used.
 	private static Boolean isStraight(ArrayList<Integer> hand) {
 		requiredCards.clear();
 
