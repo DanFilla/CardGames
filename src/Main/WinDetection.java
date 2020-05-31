@@ -125,6 +125,7 @@ public class WinDetection {
 			}
 		}
 		Collections.reverse(hand);
+		requiredCards.clear();
 		return false;
 
 	}
@@ -247,25 +248,29 @@ public class WinDetection {
 		if (hearts.size() >= 5) {
 			Collections.sort(hearts);
 			if (isStraight(hearts)) {
-				requiredCards.addAll(hearts);
+//				requiredCards.clear();
+//				requiredCards.addAll(hearts.subList(hearts.size()-5, hearts.size()));
 				return true;
 			}
 		}else if (diamonds.size() >= 5) {
 			Collections.sort(diamonds);
 			if (isStraight(diamonds)) {
-				requiredCards.addAll(diamonds);
+//				requiredCards.clear();
+//				requiredCards.addAll(diamonds.subList(diamonds.size()-5, diamonds.size()));
 				return true;
 			}
 		}else if (spades.size() >= 5) {
 			Collections.sort(spades);
 			if (isStraight(spades)) {
-				requiredCards.addAll(spades);
+//				requiredCards.clear();
+//				requiredCards.addAll(spades.subList(spades.size()-5, spades.size()));
 				return true;
 			}
 		}else if (clubs.size() >= 5) {
 			Collections.sort(clubs);
 			if (isStraight(clubs)) {
-				requiredCards.addAll(clubs);
+//				requiredCards.clear();
+//				requiredCards.addAll(clubs.subList(clubs.size()-5, clubs.size()));
 				return true;
 			}
 		}

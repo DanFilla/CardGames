@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 //		Poker game = new Poker();
-        TestRun test = new TestRun(500000);
+        TestRun test = new TestRun(1000000);
 
     }
 }

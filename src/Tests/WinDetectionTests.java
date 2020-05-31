@@ -606,4 +606,29 @@ public class WinDetectionTests {
         assertSame(expected2, handList.get(0));
     }
 
+    @Test
+    public void testStraightFlushEquals() {
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(2);
+        reqCards.add(3);
+        reqCards.add(4);
+        reqCards.add(5);
+        reqCards.add(6);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+
+        Hand expected = new StraightFlush(reqCards, kickerSet);
+
+        ArrayList<Integer> reqCards2 = new ArrayList<>();
+        reqCards2.add(3);
+        reqCards2.add(4);
+        reqCards2.add(5);
+        reqCards2.add(6);
+        reqCards2.add(7);
+        ArrayList<Integer> kickerSet2 = new ArrayList<>();
+
+        Hand expected2 = new StraightFlush(reqCards2, kickerSet2);
+
+        assertFalse(expected.equals(expected2));
+    }
+
 }
