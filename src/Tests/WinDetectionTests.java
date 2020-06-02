@@ -278,6 +278,39 @@ public class WinDetectionTests {
     }
 
     @Test
+    public void testStraightConstruction2() {
+        ArrayList<Card> flop = new ArrayList<>();
+        flop.add(new Card("14", "C"));
+        flop.add(new Card("2", "C"));
+        flop.add(new Card("9", "S"));
+        flop.add(new Card("3", "C"));
+        flop.add(new Card("4", "H"));
+        flop.add(new Card("5", "D"));
+        flop.add(new Card("7", "D"));
+
+        ArrayList<Integer> reqCards = new ArrayList<>();
+        reqCards.add(1);
+        reqCards.add(2);
+        reqCards.add(3);
+        reqCards.add(4);
+        reqCards.add(5);
+        ArrayList<Integer> kickerSet = new ArrayList<>();
+
+        Hand expected = new Straight(reqCards, kickerSet);
+        Hand actual = WinDetection.bestPokerHand(flop);
+
+        assertEquals(expected.getHandId(), actual.getHandId());
+
+        for (int i=0; i<reqCards.size(); i++) {
+            assertEquals(expected.getRequiredHand().get(i), actual.getRequiredHand().get(i));
+        }
+
+        for (int j=0; j<expected.getKickers().size(); j++) {
+            assertEquals(expected.getKickers().get(j), actual.getKickers().get(j));
+        }
+    }
+
+    @Test
     public void testStraightCompareTo() {
 
         ArrayList<Integer> reqCards = new ArrayList<>();

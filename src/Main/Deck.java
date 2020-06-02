@@ -17,6 +17,9 @@ public class Deck {
             }
         }
         Collections.shuffle(deck);
+        Collections.shuffle(deck);
+        Collections.shuffle(deck);
+        Collections.shuffle(deck);
     }
 
     public ArrayList<Card> getDeck() {

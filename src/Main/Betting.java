@@ -27,10 +27,11 @@ public class Betting {
 	}
 
 	public void bet(ArrayList<Player> playerList, ArrayList<Player> foldedPlayers) {
-		// Method will loop through players while checking the previous players bet. This previous bet
-		// is the minimum bet required to continue playing.
-		// at the end of each iteration it also checks if all of the bets are identical
-		// if they are then we know that betting has ended and we can move to the next round.
+		// Method will loop through players while checking the previous
+		// players bet. This previous bet is the minimum bet required
+		// to continue playing.  at the end of each iteration it
+		// also checks if all of the bets are identical if they are
+		// then we know that betting has ended and we can move to the next round.
 
 		// if potIsNotGood is false then the loop will break.
 		Boolean potIsNotGood = true;
@@ -85,7 +86,8 @@ public class Betting {
 
 			count++;
 
-			// reset the count variable so it does not exceed the size of the playerList.
+			// reset the count variable so it does not exceed the size
+			// of the playerList.
 			if (count > playerList.size()-1) {
 				count = 0;
 				firstRound = false;

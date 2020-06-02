@@ -100,6 +100,7 @@ public class WinDetection {
 		return false;
 	}
 
+	//TODO odds of a straight are low.
 	private static Boolean isStraight(ArrayList<Integer> hand) {
 		requiredCards.clear();
 
@@ -122,6 +123,32 @@ public class WinDetection {
 				Collections.reverse(hand);
 				Collections.reverse(requiredCards);
 				return true;
+			}
+		}
+
+		if (hand.contains(14)) {
+			requiredCards.clear();
+			ArrayList<Integer> tempHand = new ArrayList<Integer>(hand);
+			tempHand.add(1);
+
+			int count2 = 0;
+
+			for (int i=1; i<tempHand.size(); i++) {
+				if (tempHand.get(i) - tempHand.get(i - 1) == -1) {
+					if (count2 == 0) {
+						requiredCards.add(tempHand.get(i-1));
+					}
+					requiredCards.add(tempHand.get(i));
+					count2 += 1;
+				}else {
+					requiredCards.clear();
+					count2 = 0;
+				}
+				if (count2 > 3){
+					Collections.reverse(hand);
+					Collections.reverse(requiredCards);
+					return true;
+				}
 			}
 		}
 		Collections.reverse(hand);

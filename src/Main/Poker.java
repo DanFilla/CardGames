@@ -46,16 +46,20 @@ public class Poker {
 			pot.bet(players, foldedPlayers);
 		}
 
+		//Loop finds the best possible hand for each player.
 		for (Player p : players) {
 			ArrayList<Card> allCard = new ArrayList<>(this.flop);
 			allCard.addAll(p.getHand());
 			p.setBestHand(WinDetection.bestPokerHand(allCard));
 		}
 
+		// Sorting will put the best hands at the front of the list.
+		// Using the compareTo method from each hand class.
 		Collections.sort(players);
 
 		int count = 0;
 		for (int q=1; q<players.size(); q++) {
+			//Determines if there is a tie between the best hands.
 			if (players.get(q-1).equals(players.get(q))){
 				count++;
 			}else {
@@ -83,20 +87,5 @@ public class Poker {
 			System.out.println(players.get(o));
 			System.out.println(players.get(o).getBestHand());
 		}
-
-//		Player winner = players.get(0);
-//
-//		for (Player y : players) {
-//			ArrayList<Card> allCard = new ArrayList<>(this.flop);
-//			allCard.addAll(y.getHand());
-//			y.setHandMap(WinDetection.bestPokerHand(allCard));
-//			if (y.getHandMap().get("handId") < winner.getHandMap().get("handId")) {
-//				winner = y;
-//			}else if (y.getHandMap().get("handId").equals(winner.getHandMap().get("handId")) && y.getHandMap().get("highCard") > winner.getHandMap().get("highCard")) {
-//				winner = y;
-//			}
-//		}
-//		System.out.println(winner.getName());
-//		System.out.println(WinDetection.getHandName(winner.getHandMap().get("handId")));
 	}
 }
